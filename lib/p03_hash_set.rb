@@ -34,13 +34,13 @@ class HashSet
   end
 
   def resize!
-    @store.concat(Array.new(num_buckets) {Array.new})
-    current_count = @count
-    @store.each do |array|
+    old_store = @store
+    @store = Array.new(num_buckets * 2) { Array.new }
+    @count = 0
+    old_store.each do |array|
       array.each do |num|
         insert(num)
       end
     end
-    @count = current_count
   end
 end

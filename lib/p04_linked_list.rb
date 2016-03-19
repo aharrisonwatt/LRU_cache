@@ -75,11 +75,10 @@ class LinkedList
     current_node
   end
 
-  def each(&prc)
-    prc ||= Proc.new { |el| return el }
+  def each
     current_node = first
     until current_node == @tail
-      prc.call(current_node)
+      yield current_node
       current_node = current_node.next
     end
   end
